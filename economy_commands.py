@@ -1,11 +1,13 @@
 from discord.ext import commands
 import discord
+from discord_components import Button, ButtonStyle
 import matplotlib.pyplot as plt
 import sys
 import os
 import pyimgur
 import datetime
 import math
+import asyncio
 from main import gst_path, IMGUR_CLIENT_ID, bot_colour, command_prefix, bot
 
 im = pyimgur.Imgur(IMGUR_CLIENT_ID)
@@ -28,7 +30,7 @@ economy_dict = {
         "technology": "Industry (Technology)",
         "utilities": "Industry (Utilities)",
         "country": "Country (U.S. listed stocks only)",
-        "capitalization": "Capitalization",
+        "capitalization": "Capitalization"
     }
 
 def img_path_exists_and_correction(img_path, time):
@@ -55,21 +57,11 @@ class EconomyCommands(commands.Cog):
         if not os.path.exists(image_path):
             time = now + datetime.timedelta(seconds=1)
             img_path = os.path.join(gst_path, 'exports', 'economy', f"feargreed_{now.strftime('%Y%m%d_%H%M%S')}.png")
-        i = 0
-        while not os.path.exists(image_path) and i < 10:
+        while not os.path.exists(image_path):
             image_path, now = img_path_exists_and_correction(image_path, now)
-            i += 1
-        try:
-            uploaded_image = im.upload_image(image_path, title='something')
-        except:
-            report = "Error: The image could not be found"
-            print("Error with uploading the the image to Imgur.")
-            image_link = uploaded_image.link
-            embed = discord.Embed(title='CNN Fear Geed Index', description=report, colour=bot_colour)
-            embed.set_author(name="Gamestonk Terminal",
-                             icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true")
-            await ctx.send(embed=embed)
-            return
+            print(image_path)
+        uploaded_image = im.upload_image(image_path, title='something')
+        image_link = uploaded_image.link
         embed = discord.Embed(title='CNN Fear Geed Index', description=report, colour=bot_colour)
         embed.set_author(name="Gamestonk Terminal",
                          icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true")
@@ -152,39 +144,68 @@ class EconomyCommands(commands.Cog):
     @commands.command(name='valuation')
     async def valuation(self, ctx: commands.Context, arg):
         sector = economy_dict[arg]
-        print(sector)
         df_group = finviz_model.get_valuation_performance_data(sector, "valuation")
-        df_group_str = df_group.fillna("").to_string(index=False)
-        df_group_str_perm = df_group_str
-        if len(df_group_str) > 4050:
-            df_group_str = "```" + df_group_str[:4049] + "```"
-            too_long = True
-        else:
-            df_group_str = "```" + df_group_str + "\n\n...```"
-            too_long = False
-        title = "Finviz " + sector + " Valuation"
-        embed = discord.Embed(title=title, description=df_group_str, colour=bot_colour)
-        embed.set_author(name="Gamestonk Terminal",
-                         icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true")
-        await ctx.send(embed=embed)
-        if too_long:
-            times = math.ceil((len(df_group_str_perm)/4050)-1)
-            i = 1
-            char_num = 4050
-            char_num_upper = 8100
-            while times >= i:
-                title = "Finviz " + sector + " Valuation Part " + str(i+1)
-                if i == times:
-                    df_group_str = "``` ...\n" + df_group_str_perm[char_num:] + "```"
-                else:
-                    df_group_str = "``` ...\n" + df_group_str_perm[char_num:char_num_upper] + "```"
-                embed = discord.Embed(title=title, description=df_group_str, colour=bot_colour)
-                embed.set_author(name="Gamestonk Terminal",
-                                 icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true")
-                await ctx.send(embed=embed)
-                i += 1
-                char_num = char_num_upper
-                char_num_upper += 4050
+        future_column_name = df_group['Name']
+        df_group = df_group.transpose()
+        df_group.columns = future_column_name
+        df_group.drop('Name')
+        columns = []
+        initial_str = "Page 1: Overview"
+        i = 2
+        current = 0
+        for column in df_group.columns.values:
+            initial_str = initial_str + "\nPage " + str(i) + ": " + column
+            i += 1
+        columns.append(discord.Embed(title = "Finviz " + sector + " Valuation", description=initial_str, colour=bot_colour).set_author(name="Gamestonk Terminal",
+                         icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true"))
+        for column in df_group.columns.values:
+            columns.append(discord.Embed(description="```" + df_group[column].fillna("").to_string() + "```",
+                                         colour=bot_colour).set_author(name="Gamestonk Terminal",
+                         icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true"))
+
+        components = [[Button(label="Prev", id="back", style=ButtonStyle.red),
+            Button(label=f"Page {int(columns.index(columns[current]))}/{len(columns)}",
+                   id="cur", style=ButtonStyle.green, disabled=True),
+            Button(label="Next", id="front", style=ButtonStyle.green)]]
+        mainMessage = await ctx.send(embed=columns[current], components=components)
+        while True:
+            # Try and except blocks to catch timeout and break
+            try:
+                interaction = await bot.wait_for(
+                    "button_click",
+                    check=lambda i: i.component.id in ["back", "front"],
+                    timeout=30.0  # 30 seconds of inactivity
+                )
+                # Getting the right list index
+                if interaction.component.id == "back":
+                    current -= 1
+                elif interaction.component.id == "front":
+                    current += 1
+                # If its out of index, go back to start / end
+                if current == len(columns):
+                    current = 0
+                elif current < 0:
+                    current = len(columns) - 1
+
+                components = [[Button(label="Prev", id="back", style=ButtonStyle.red),
+                               Button(
+                                   label=f"Page {int(columns.index(columns[current]))}/{len(columns)}",
+                                   id="cur", style=ButtonStyle.green, disabled=True),
+                               Button(label="Next", id="front", style=ButtonStyle.green)]]
+
+                await interaction.edit_origin(
+                    embed=columns[current],
+                    components=components
+                )
+            except asyncio.TimeoutError:
+                components = [[Button(label="Prev", id="back", style=ButtonStyle.green, disabled=True),
+                               Button(label=f"Page {int(columns.index(columns[current])) + 1}/{len(columns)}",
+                                    id="cur", style=ButtonStyle.grey, disabled=True),
+                               Button(label="Next", id="front", style=ButtonStyle.green, disabled=True)]]
+                await mainMessage.edit(
+                    components=components
+                )
+                break
 
 
 def setup(bot: commands.Bot):
