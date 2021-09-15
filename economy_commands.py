@@ -185,8 +185,8 @@ class EconomyCommands(commands.Cog):
             try:
                 interaction = await bot.wait_for(
                     "button_click",
-                    check=lambda i: i.component.id in ["back", "front"],  # You can add more
-                    timeout=20.0  # 20 seconds of inactivity
+                    check=lambda i: i.component.id in ["back", "front"],
+                    timeout=30.0  # 30 seconds of inactivity
                 )
                 # Getting the right list index
                 if interaction.component.id == "back":
