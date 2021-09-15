@@ -57,9 +57,21 @@ class EconomyCommands(commands.Cog):
         if not os.path.exists(image_path):
             time = now + datetime.timedelta(seconds=1)
             img_path = os.path.join(gst_path, 'exports', 'economy', f"feargreed_{now.strftime('%Y%m%d_%H%M%S')}.png")
-        while not os.path.exists(image_path):
+        i = 0
+        while not os.path.exists(image_path) and i < 10:
             image_path, now = img_path_exists_and_correction(image_path, now)
-            print(image_path)
+            i += 1
+        try:
+            uploaded_image = im.upload_image(image_path, title='something')
+        except:
+            report = "Error: The image could not be found"
+            print("Error with uploading the the image to Imgur.")
+            image_link = uploaded_image.link
+            embed = discord.Embed(title='CNN Fear Geed Index', description=report, colour=bot_colour)
+            embed.set_author(name="Gamestonk Terminal",
+                             icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true")
+            await ctx.send(embed=embed)
+            return
         uploaded_image = im.upload_image(image_path, title='something')
         image_link = uploaded_image.link
         embed = discord.Embed(title='CNN Fear Geed Index', description=report, colour=bot_colour)
@@ -173,8 +185,8 @@ class EconomyCommands(commands.Cog):
             try:
                 interaction = await bot.wait_for(
                     "button_click",
-                    check=lambda i: i.component.id in ["back", "front"],
-                    timeout=30.0  # 30 seconds of inactivity
+                    check=lambda i: i.component.id in ["back", "front"],  # You can add more
+                    timeout=20.0  # 20 seconds of inactivity
                 )
                 # Getting the right list index
                 if interaction.component.id == "back":
@@ -187,6 +199,7 @@ class EconomyCommands(commands.Cog):
                 elif current < 0:
                     current = len(columns) - 1
 
+                # Edit to new page + the center counter changes
                 components = [[Button(label="Prev", id="back", style=ButtonStyle.red),
                                Button(
                                    label=f"Page {int(columns.index(columns[current]))}/{len(columns)}",
@@ -198,6 +211,7 @@ class EconomyCommands(commands.Cog):
                     components=components
                 )
             except asyncio.TimeoutError:
+                # Disable and get outta here
                 components = [[Button(label="Prev", id="back", style=ButtonStyle.green, disabled=True),
                                Button(label=f"Page {int(columns.index(columns[current])) + 1}/{len(columns)}",
                                     id="cur", style=ButtonStyle.grey, disabled=True),
@@ -210,3 +224,4 @@ class EconomyCommands(commands.Cog):
 
 def setup(bot: commands.Bot):
     bot.add_cog(EconomyCommands(bot))
+    
