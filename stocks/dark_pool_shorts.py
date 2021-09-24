@@ -467,7 +467,7 @@ class DarkPoolShortsCommands(commands.Cog):
         try:
             reaction, user = await bot.wait_for('reaction_add', timeout=10, check=check)
             if reaction.emoji == '0️⃣':
-                await shorted_command(ctx, arg)
+                await shorted_command(ctx, 5)
             elif reaction.emoji == '1️⃣':
                 await high_short_interest_command(ctx, 10)
             elif reaction.emoji == '2️⃣':
