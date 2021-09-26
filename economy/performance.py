@@ -33,8 +33,8 @@ async def performance_command(ctx, arg):
     df_group.drop("Name")
     columns = []
 
-    initial_str = "Page 1: Overview"
-    i = 2
+    initial_str = "Page 0: Overview"
+    i = 1
     for col_name in df_group.columns.values:
         initial_str += f"\nPage {i}: {col_name}"
         i += 1
