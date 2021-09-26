@@ -38,7 +38,9 @@ async def valuation_command(ctx, arg):
 
         help_txt += f"\nPossible <GROUP> arguments are:{possible_args}"
         embed = discord.Embed(
-            title="[Finviz] Valuation HELP", description=help_txt, colour=cfg.COLOR
+            title="Economy: [Finviz] Valuation HELP",
+            description=help_txt,
+            colour=cfg.COLOR,
         )
         embed.set_author(
             name=cfg.AUTHOR_NAME,
@@ -65,7 +67,7 @@ async def valuation_command(ctx, arg):
 
         columns.append(
             discord.Embed(
-                title=f"[Finviz] Valuation {group}",
+                title=f"Economy: [Finviz] Valuation {group}",
                 description=initial_str,
                 colour=cfg.COLOR,
             ).set_author(

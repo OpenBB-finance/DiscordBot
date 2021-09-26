@@ -9,7 +9,9 @@ async def futures_command(ctx, arg):
     if arg == "-h":
         help_txt = "Futures/Commodities [Source: Wall St. Journal]\n"
         embed = discord.Embed(
-            title="[WSJ] Futures/Commodities HELP", description=help_txt, colour=cfg.COLOR
+            title="Economy: [WSJ] Futures/Commodities HELP",
+            description=help_txt,
+            colour=cfg.COLOR,
         )
         embed.set_author(
             name=cfg.AUTHOR_NAME,
@@ -26,7 +28,9 @@ async def futures_command(ctx, arg):
             df_data_str = "```" + df_data.to_string(index=False) + "```"
 
         embed = discord.Embed(
-            title="[WSJ] Futures/Commodities", description=df_data_str, colour=cfg.COLOR
+            title="Economy: [WSJ] Futures/Commodities",
+            description=df_data_str,
+            colour=cfg.COLOR,
         )
         embed.set_author(
             name=cfg.AUTHOR_NAME,

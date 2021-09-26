@@ -39,7 +39,7 @@ async def performance_command(ctx, arg):
 
         help_txt += f"Possible <GROUP> arguments are:{possible_args}"
         embed = discord.Embed(
-            title="[Finviz] Performance HELP", description=help_txt, colour=cfg.COLOR
+            title="Economy: [Finviz] Performance HELP", description=help_txt, colour=cfg.COLOR
         )
         embed.set_author(
             name=cfg.AUTHOR_NAME,
@@ -66,7 +66,7 @@ async def performance_command(ctx, arg):
 
         columns.append(
             discord.Embed(
-                title=f"[Finviz] Performance {group}",
+                title=f"Economy: [Finviz] Performance {group}",
                 description=initial_str,
                 colour=cfg.COLOR,
             ).set_author(

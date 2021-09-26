@@ -9,7 +9,9 @@ async def glbonds_command(ctx, arg):
     if arg == "-h":
         help_txt = "Global Bonds [Source: Wall St. Journal]\n"
         embed = discord.Embed(
-            title="[WSJ] Global Bonds HELP", description=help_txt, colour=cfg.COLOR
+            title="Economy: [WSJ] Global Bonds HELP",
+            description=help_txt,
+            colour=cfg.COLOR,
         )
         embed.set_author(
             name=cfg.AUTHOR_NAME,
@@ -26,7 +28,9 @@ async def glbonds_command(ctx, arg):
             df_data_str = "```" + df_data.to_string(index=False) + "```"
 
         embed = discord.Embed(
-            title="[WSJ] Global Bonds", description=df_data_str, colour=cfg.COLOR
+            title="Economy: [WSJ] Global Bonds",
+            description=df_data_str,
+            colour=cfg.COLOR,
         )
         embed.set_author(
             name=cfg.AUTHOR_NAME,

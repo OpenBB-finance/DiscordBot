@@ -16,7 +16,9 @@ async def feargreed_command(ctx, arg):
         Safe Heaven Demand, and Index. [Source: CNN Business]\n"""
 
         embed = discord.Embed(
-            title="[CNN] Fear Geed Index HELP", description=help_txt, colour=cfg.COLOR
+            title="Economy: [CNN] Fear Geed Index HELP",
+            description=help_txt,
+            colour=cfg.COLOR,
         )
         embed.set_author(
             name=cfg.AUTHOR_NAME,
@@ -54,7 +56,7 @@ async def feargreed_command(ctx, arg):
             i += 1
 
         embed = discord.Embed(
-            title="[CNN] Fear Geed Index", description=report, colour=cfg.COLOR
+            title="Economy: [CNN] Fear Geed Index", description=report, colour=cfg.COLOR
         )
         embed.set_author(
             name=cfg.AUTHOR_NAME,

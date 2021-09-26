@@ -9,7 +9,7 @@ async def usbonds_command(ctx, arg):
     if arg == "-h":
         help_txt = "US Bonds [Source: Wall St. Journal]\n"
         embed = discord.Embed(
-            title="[WSJ] US Bonds HELP", description=help_txt, colour=cfg.COLOR
+            title="Economy: [WSJ] US Bonds HELP", description=help_txt, colour=cfg.COLOR
         )
         embed.set_author(
             name=cfg.AUTHOR_NAME,
@@ -26,7 +26,7 @@ async def usbonds_command(ctx, arg):
             df_data_str = "```" + df_data.to_string(index=False) + "```"
 
         embed = discord.Embed(
-            title="[WSJ] US Bonds", description=df_data_str, colour=cfg.COLOR
+            title="Economy: [WSJ] US Bonds", description=df_data_str, colour=cfg.COLOR
         )
         embed.set_author(
             name=cfg.AUTHOR_NAME,
