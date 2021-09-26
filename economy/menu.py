@@ -3,18 +3,15 @@ import asyncio
 import config_discordbot as cfg
 from discordbot import gst_bot
 
-from economy.commands import (
-    feargreed_command,
-    overview_command,
-    indices_command,
-    indices_command,
-    futures_command,
-    usbonds_command,
-    glbonds_command,
-    currencies_command,
-    valuation_command,
-    performance_command,
-)
+from economy.feargreed import feargreed_command
+from economy.overview import overview_command
+from economy.indices import indices_command
+from economy.futures import futures_command
+from economy.usbonds import usbonds_command
+from economy.glbonds import glbonds_command
+from economy.currencies import currencies_command
+from economy.valuation import valuation_command
+from economy.performance import performance_command
 
 
 class EconomyCommands(discord.ext.commands.Cog):
@@ -59,12 +56,18 @@ class EconomyCommands(discord.ext.commands.Cog):
         await ctx.send(embed=embed)
 
     @discord.ext.commands.command(name="economy.valuation")
-    async def valuation(self, ctx: discord.ext.commands.Context, arg):
-        await valuation_command(ctx, arg)
+    async def valuation(self, ctx: discord.ext.commands.Context, arg=""):
+        if arg:
+            await valuation_command(ctx, arg)
+        else:
+            await valuation_command(ctx)
 
     @discord.ext.commands.command(name="economy.performance")
-    async def performance(self, ctx: discord.ext.commands.Context, arg):
-        await performance_command(ctx, arg)
+    async def performance(self, ctx: discord.ext.commands.Context, arg=""):
+        if arg:
+            await performance_command(ctx, arg)
+        else:
+            await performance_command(ctx)
 
     @discord.ext.commands.command(name="economy")
     async def economy(self, ctx: discord.ext.commands.Context):
@@ -122,7 +125,7 @@ class EconomyCommands(discord.ext.commands.Cog):
                 embed = feargreed_command()
                 await ctx.send(embed=embed)
             elif reaction.emoji == "7️⃣":
-                await valuation_command(ctx, "")
+                await valuation_command(ctx)
             elif reaction.emoji == "8️⃣":
                 await performance_command(ctx, "")
 

@@ -1,5 +1,6 @@
 import discord
 import discord_components
+import pyimgur
 import config_discordbot as cfg
 
 
@@ -12,10 +13,10 @@ gst_bot = discord.ext.commands.Bot(
 )
 discord_components.DiscordComponents(gst_bot)
 
-
 async def on_ready():
     print("GST Discord Bot Ready to Gamestonk!")
 
+gst_imgur = pyimgur.Imgur(cfg.IMGUR_CLIENT_ID)
 
 # Loads the commands (Cogs) from each "context"
 gst_bot.load_extension("general_commands")
