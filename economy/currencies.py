@@ -4,7 +4,7 @@ import config_discordbot as cfg
 from gamestonk_terminal.economy import wsj_model
 
 
-def currencies_command():
+async def currencies_command(ctx):
     df_data = wsj_model.global_currencies()
     if df_data.empty:
         df_data_str = "No currencies data available"
@@ -19,4 +19,4 @@ def currencies_command():
         icon_url=cfg.AUTHOR_ICON_URL,
     )
 
-    return embed
+    await ctx.send(embed=embed)

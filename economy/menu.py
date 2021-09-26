@@ -22,52 +22,39 @@ class EconomyCommands(discord.ext.commands.Cog):
 
     @discord.ext.commands.command(name="economy.feargreed")
     async def feargreed(self, ctx: discord.ext.commands.Context):
-        embed = feargreed_command()
-        await ctx.send(embed=embed)
+        await feargreed_command(ctx)
 
     @discord.ext.commands.command(name="economy.overview")
     async def overview(self, ctx: discord.ext.commands.Context):
-        embed = overview_command()
-        await ctx.send(embed=embed)
+        await overview_command(ctx)
 
     @discord.ext.commands.command(name="economy.indices")
     async def indices(self, ctx: discord.ext.commands.Context):
-        embed = indices_command()
-        await ctx.send(embed=embed)
+        await indices_command(ctx)
 
     @discord.ext.commands.command(name="economy.futures")
     async def futures(self, ctx: discord.ext.commands.Context):
-        embed = futures_command()
-        await ctx.send(embed=embed)
+        await futures_command(ctx)
 
     @discord.ext.commands.command(name="economy.usbonds")
     async def usbonds(self, ctx: discord.ext.commands.Context):
-        embed = usbonds_command()
-        await ctx.send(embed=embed)
+        await usbonds_command(ctx)
 
     @discord.ext.commands.command(name="economy.glbonds")
     async def glbonds(self, ctx: discord.ext.commands.Context):
-        embed = glbonds_command()
-        await ctx.send(embed=embed)
+        await glbonds_command(ctx)
 
     @discord.ext.commands.command(name="economy.currencies")
     async def currencies(self, ctx: discord.ext.commands.Context):
-        embed = currencies_command()
-        await ctx.send(embed=embed)
+        await currencies_command(ctx)
 
     @discord.ext.commands.command(name="economy.valuation")
     async def valuation(self, ctx: discord.ext.commands.Context, arg=""):
-        if arg:
-            await valuation_command(ctx, arg)
-        else:
-            await valuation_command(ctx)
+        await valuation_command(ctx, arg)
 
     @discord.ext.commands.command(name="economy.performance")
     async def performance(self, ctx: discord.ext.commands.Context, arg=""):
-        if arg:
-            await performance_command(ctx, arg)
-        else:
-            await performance_command(ctx)
+        await performance_command(ctx, arg)
 
     @discord.ext.commands.command(name="economy")
     async def economy(self, ctx: discord.ext.commands.Context):
@@ -79,8 +66,8 @@ class EconomyCommands(discord.ext.commands.Cog):
             "4️⃣ !economy.indices\n"
             "5️⃣ !economy.currencies\n"
             "6️⃣ !economy.feargreed\n"
-            "7️⃣ !economy.valuation <GROUP> (default: sector)\n"
-            "8️⃣ !economy.performance <GROUP> (default: sector)"
+            "7️⃣ !economy.valuation <GROUP> (e.g. sector)\n"
+            "8️⃣ !economy.performance <GROUP> (e.g. sector)"
         )
 
         title = "Economy Menu"
@@ -104,34 +91,26 @@ class EconomyCommands(discord.ext.commands.Cog):
                 "reaction_add", timeout=10, check=check
             )
             if reaction.emoji == "0️⃣":
-                embed = overview_command()
-                await ctx.send(embed=embed)
+                await overview_command(ctx)
             elif reaction.emoji == "1️⃣":
-                embed = futures_command()
-                await ctx.send(embed=embed)
+                await futures_command(ctx)
             elif reaction.emoji == "2️⃣":
-                embed = usbonds_command()
-                await ctx.send(embed=embed)
+                await usbonds_command(ctx)
             elif reaction.emoji == "3️⃣":
-                embed = glbonds_command()
-                await ctx.send(embed=embed)
+                await glbonds_command(ctx)
             elif reaction.emoji == "4️⃣":
-                embed = indices_command()
-                await ctx.send(embed=embed)
+                await indices_command(ctx)
             elif reaction.emoji == "5️⃣":
-                embed = currencies_command()
-                await ctx.send(embed=embed)
+                await currencies_command(ctx)
             elif reaction.emoji == "6️⃣":
-                embed = feargreed_command()
-                await ctx.send(embed=embed)
+                await feargreed_command(ctx)
             elif reaction.emoji == "7️⃣":
                 await valuation_command(ctx)
             elif reaction.emoji == "8️⃣":
                 await performance_command(ctx)
 
-            await msg.remove_reaction(reaction.emoji, user)
-
             # TODO: Make this work - may need to set different discord server configurations
+            # await msg.remove_reaction(reaction.emoji, user)
             # for emoji in emoji_list:
             #    await msg.remove_reaction(emoji, user)
 

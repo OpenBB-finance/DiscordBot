@@ -4,7 +4,7 @@ import config_discordbot as cfg
 from gamestonk_terminal.economy import wsj_model
 
 
-def futures_command():
+async def futures_command(ctx):
     df_data = wsj_model.top_commodities()
     if df_data.empty:
         df_data_str = "No futures/commodities data available"
@@ -18,4 +18,5 @@ def futures_command():
         name=cfg.AUTHOR_NAME,
         icon_url=cfg.AUTHOR_ICON_URL,
     )
-    return embed
+
+    await ctx.send(embed=embed)

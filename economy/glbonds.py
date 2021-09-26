@@ -4,7 +4,7 @@ import config_discordbot as cfg
 from gamestonk_terminal.economy import wsj_model
 
 
-def glbonds_command():
+async def glbonds_command(ctx):
     df_data = wsj_model.global_bonds()
     if df_data.empty:
         df_data_str = "No global bonds data available"
@@ -19,4 +19,4 @@ def glbonds_command():
         icon_url=cfg.AUTHOR_ICON_URL,
     )
 
-    return embed
+    await ctx.send(embed=embed)

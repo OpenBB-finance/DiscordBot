@@ -8,7 +8,7 @@ from discordbot import gst_imgur
 from gamestonk_terminal.economy import cnn_view, cnn_model
 
 
-def feargreed_command():
+async def feargreed_command(ctx):
     plt.ion()
     fig = plt.figure(figsize=[1, 1], dpi=10)
 
@@ -53,4 +53,5 @@ def feargreed_command():
         print("Error with uploading the the image to Imgur.")
 
     plt.close("all")
-    return embed
+
+    await ctx.send(embed=embed)

@@ -24,6 +24,9 @@ economy_group = {
 
 
 async def performance_command(ctx, arg):
+    # Select default
+    if not arg:
+        arg = "sector"
     group = economy_group[arg]
     df_group = finviz_model.get_valuation_performance_data(group, "performance")
 
