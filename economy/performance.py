@@ -37,9 +37,13 @@ async def performance_command(ctx, arg):
         for k, v in economy_group.items():
             possible_args += f"\n{k}: {v}"
 
-        help_txt += f"Possible <GROUP> arguments are:{possible_args}"
+        help_txt += "\nPossible argments:\n"
+        help_txt += f"<GROUP> Groups to get data from. Default: sector\n"
+        help_txt += f"The choices are:{possible_args}"
         embed = discord.Embed(
-            title="Economy: [Finviz] Performance HELP", description=help_txt, colour=cfg.COLOR
+            title="Economy: [Finviz] Performance HELP",
+            description=help_txt,
+            colour=cfg.COLOR,
         )
         embed.set_author(
             name=cfg.AUTHOR_NAME,
