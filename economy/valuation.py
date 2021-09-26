@@ -4,26 +4,26 @@ from helpers import pagination
 
 from gamestonk_terminal.economy import finviz_model
 
-economy_group = {
-    "sector": "Sector",
-    "industry": "Industry",
-    "basic_materials": "Industry (Basic Materials)",
-    "communication services": "Industry (Communication Services)",
-    "consumer_cyclical": "Industry (Consumer Cyclical)",
-    "consumer_defensive": "Industry (Consumer Defensive)",
-    "energy": "Industry (Energy)",
-    "financial": "Industry (Financial)",
-    "healthcare": "Industry (Healthcare)",
-    "industrials": "Industry (Industrials)",
-    "real_estate": "Industry (Real Estate)",
-    "technology": "Industry (Technology)",
-    "utilities": "Industry (Utilities)",
-    "country": "Country (U.S. listed stocks only)",
-    "capitalization": "Capitalization",
-}
-
 
 async def valuation_command(ctx, arg):
+    economy_group = {
+        "sector": "Sector",
+        "industry": "Industry",
+        "basic_materials": "Industry (Basic Materials)",
+        "communication services": "Industry (Communication Services)",
+        "consumer_cyclical": "Industry (Consumer Cyclical)",
+        "consumer_defensive": "Industry (Consumer Defensive)",
+        "energy": "Industry (Energy)",
+        "financial": "Industry (Financial)",
+        "healthcare": "Industry (Healthcare)",
+        "industrials": "Industry (Industrials)",
+        "real_estate": "Industry (Real Estate)",
+        "technology": "Industry (Technology)",
+        "utilities": "Industry (Utilities)",
+        "country": "Country (U.S. listed stocks only)",
+        "capitalization": "Capitalization",
+    }
+
     # Select default
     if not arg:
         arg = "sector"
@@ -52,7 +52,9 @@ async def valuation_command(ctx, arg):
         await ctx.send(embed=embed)
 
     else:
+        # Parse argument
         group = economy_group[arg]
+
         df_group = finviz_model.get_valuation_performance_data(group, "valuation")
 
         future_column_name = df_group["Name"]
