@@ -1,6 +1,6 @@
 from discord.ext import commands
 import discord
-from main import bot_colour
+from discordbot import bot_colour
 
 
 class GeneralCommands(commands.Cog):
