@@ -32,8 +32,8 @@ class GeneralCommands(commands.Cog):
             colour=cfg.COLOR,
         )
         embed.set_author(
-            name="Gamestonk Terminal",
-            icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+            name=cfg.AUTHOR_NAME,
+            icon_url=cfg.AUTHOR_ICON_URL,
         )
         embed.add_field(name="Partnerships:", value=partnerships, inline=False)
         embed.add_field(name="Disclaimer:", value=disclaimer, inline=False)

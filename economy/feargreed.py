@@ -7,6 +7,7 @@ from discordbot import gst_imgur
 
 from gamestonk_terminal.economy import cnn_view, cnn_model
 
+
 def feargreed_command():
     plt.ion()
     fig = plt.figure(figsize=[1, 1], dpi=10)
@@ -39,8 +40,8 @@ def feargreed_command():
         title="[CNN] Fear Geed Index", description=report, colour=cfg.COLOR
     )
     embed.set_author(
-        name="Gamestonk Terminal",
-        icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+        name=cfg.AUTHOR_NAME,
+        icon_url=cfg.AUTHOR_ICON_URL,
     )
 
     if os.path.exists(image_path):

@@ -86,8 +86,8 @@ class EconomyCommands(discord.ext.commands.Cog):
         title = "Economy Menu"
         embed = discord.Embed(title=title, description=text, colour=cfg.COLOR)
         embed.set_author(
-            name="Gamestonk Terminal",
-            icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+            name=cfg.AUTHOR_NAME,
+            icon_url=cfg.AUTHOR_ICON_URL,
         )
         msg = await ctx.send(embed=embed)
 
@@ -127,7 +127,7 @@ class EconomyCommands(discord.ext.commands.Cog):
             elif reaction.emoji == "7️⃣":
                 await valuation_command(ctx)
             elif reaction.emoji == "8️⃣":
-                await performance_command(ctx, "")
+                await performance_command(ctx)
 
             await msg.remove_reaction(reaction.emoji, user)
 

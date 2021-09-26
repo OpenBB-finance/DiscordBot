@@ -43,8 +43,8 @@ async def shorted_command(ctx, arg):
         discord.Embed(
             title="Most Shorted Stocks", description=initial_str, colour=cfg.COLOR
         ).set_author(
-            name="Gamestonk Terminal",
-            icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+            name=cfg.AUTHOR_NAME,
+            icon_url=cfg.AUTHOR_ICON_URL,
         )
     )
     for column in df.columns.values:
@@ -54,8 +54,8 @@ async def shorted_command(ctx, arg):
                 description="```" + df[column].fillna("").to_string() + "```",
                 colour=cfg.COLOR,
             ).set_author(
-                name="Gamestonk Terminal",
-                icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+                name=cfg.AUTHOR_NAME,
+                icon_url=cfg.AUTHOR_ICON_URL,
             )
         )
 
@@ -97,8 +97,8 @@ def fail_to_deliver_command(ticker, start, end):
     title = "Fail to Deliever " + ticker
     embed = discord.Embed(title=title, colour=cfg.COLOR)
     embed.set_author(
-        name="Gamestonk Terminal",
-        icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+        name=cfg.AUTHOR_NAME,
+        icon_url=cfg.AUTHOR_ICON_URL,
     )
     embed.set_image(url=image_link)
     os.remove("dps_ftd.png")
@@ -119,8 +119,8 @@ def dark_pool_otc_command(ticker, start, end):
     title = "Dark Pool OTC " + ticker
     embed = discord.Embed(title=title, colour=cfg.COLOR)
     embed.set_author(
-        name="Gamestonk Terminal",
-        icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+        name=cfg.AUTHOR_NAME,
+        icon_url=cfg.AUTHOR_ICON_URL,
     )
     ats, otc = finra_model.getTickerFINRAdata(ticker)
 
@@ -206,8 +206,8 @@ def spos_command(ticker):
     title = "SPOS " + ticker
     embed = discord.Embed(title=title, colour=cfg.COLOR)
     embed.set_author(
-        name="Gamestonk Terminal",
-        icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+        name=cfg.AUTHOR_NAME,
+        icon_url=cfg.AUTHOR_ICON_URL,
     )
 
     df = stockgrid_model.get_net_short_position(ticker)
@@ -254,8 +254,8 @@ def psi_command(ticker):
     title = "PSI " + ticker
     embed = discord.Embed(title=title, colour=cfg.COLOR)
     embed.set_author(
-        name="Gamestonk Terminal",
-        icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+        name=cfg.AUTHOR_NAME,
+        icon_url=cfg.AUTHOR_ICON_URL,
     )
 
     df, prices = stockgrid_model.get_short_interest_volume(ticker)
@@ -341,8 +341,8 @@ async def high_short_interest_command(ctx, num):
         discord.Embed(
             title="High Short Interest", description=initial_str, colour=cfg.COLOR
         ).set_author(
-            name="Gamestonk Terminal",
-            icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+            name=cfg.AUTHOR_NAME,
+            icon_url=cfg.AUTHOR_ICON_URL,
         )
     )
     for column in df.columns.values:
@@ -352,8 +352,8 @@ async def high_short_interest_command(ctx, num):
                 description="```" + df[column].fillna("").to_string() + "```",
                 colour=cfg.COLOR,
             ).set_author(
-                name="Gamestonk Terminal",
-                icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+                name=cfg.AUTHOR_NAME,
+                icon_url=cfg.AUTHOR_ICON_URL,
             )
         )
 
@@ -395,8 +395,8 @@ async def pos_command(ctx, num, sort):
         discord.Embed(
             title="Dark Pool Short Position", description=initial_str, colour=cfg.COLOR
         ).set_author(
-            name="Gamestonk Terminal",
-            icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+            name=cfg.AUTHOR_NAME,
+            icon_url=cfg.AUTHOR_ICON_URL,
         )
     )
     for column in df.columns.values:
@@ -410,8 +410,8 @@ async def pos_command(ctx, num, sort):
                 + "```",
                 colour=cfg.COLOR,
             ).set_author(
-                name="Gamestonk Terminal",
-                icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+                name=cfg.AUTHOR_NAME,
+                icon_url=cfg.AUTHOR_ICON_URL,
             )
         )
 
@@ -446,8 +446,8 @@ async def sidtc_command(ctx, num, sort):
         discord.Embed(
             title="Dark Pool Shorts", description=initial_str, colour=cfg.COLOR
         ).set_author(
-            name="Gamestonk Terminal",
-            icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+            name=cfg.AUTHOR_NAME,
+            icon_url=cfg.AUTHOR_ICON_URL,
         )
     )
     for column in df.columns.values:
@@ -461,8 +461,8 @@ async def sidtc_command(ctx, num, sort):
                 + "```",
                 colour=cfg.COLOR,
             ).set_author(
-                name="Gamestonk Terminal",
-                icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+                name=cfg.AUTHOR_NAME,
+                icon_url=cfg.AUTHOR_ICON_URL,
             )
         )
 
@@ -530,8 +530,8 @@ class DarkPoolShortsCommands(commands.Cog):
         title = "Dark Pool Shorts (DPS) Menu"
         embed = discord.Embed(title=title, description=text, colour=cfg.COLOR)
         embed.set_author(
-            name="Gamestonk Terminal",
-            icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
+            name=cfg.AUTHOR_NAME,
+            icon_url=cfg.AUTHOR_ICON_URL,
         )
         msg = await ctx.send(embed=embed)
 
