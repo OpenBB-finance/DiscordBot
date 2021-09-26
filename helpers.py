@@ -11,7 +11,7 @@ async def pagination(cols, ctx):
                 label="Prev", id="back", style=discord_components.ButtonStyle.red
             ),
             discord_components.Button(
-                label=f"Page {int(cols.index(cols[current]))}/{len(cols)}",
+                label=f"Page {int(cols.index(cols[current]))}/{len(cols)-1}",
                 id="cur",
                 style=discord_components.ButtonStyle.green,
                 disabled=True,
@@ -52,7 +52,7 @@ async def pagination(cols, ctx):
                         style=discord_components.ButtonStyle.red,
                     ),
                     discord_components.Button(
-                        label=f"Page {int(cols.index(cols[current]))}/{len(cols)}",
+                        label=f"Page {int(cols.index(cols[current]))}/{len(cols)-1}",
                         id="cur",
                         style=discord_components.ButtonStyle.green,
                         disabled=True,
@@ -78,7 +78,7 @@ async def pagination(cols, ctx):
                         disabled=True,
                     ),
                     discord_components.Button(
-                        label=f"Page {int(cols.index(cols[current])) + 1}/{len(cols)}",
+                        label=f"Page {int(cols.index(cols[current])) + 1}/{len(cols)-1}",
                         id="cur",
                         style=discord_components.ButtonStyle.grey,
                         disabled=True,

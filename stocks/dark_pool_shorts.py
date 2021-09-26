@@ -5,6 +5,7 @@ from discordbot import gst_bot
 import config_discordbot as cfg
 from stocks.stock_main import load
 import os
+import asyncio
 from datetime import datetime, timedelta
 from matplotlib import pyplot as plt
 import matplotlib.dates as mdates
@@ -521,7 +522,7 @@ class DarkPoolShortsCommands(commands.Cog):
             "(default: 10) SORT (default: dpp_dollar; options: sv,sv_pct,nsv,nsv_dollar,dpp,dpp_dollar)\n\n3️⃣ "
             "!stocks.dps.sidtc NUM (default: 10) SORT (default: float; options: float,dtc,si)\n\nCommands below "
             "require the input TICKER and must be entered directly:\n(DATE format: "
-            + +")\n\n4️⃣"
+            ")\n\n4️⃣"
             "!stocks.dps.ftd TICKER DATE_START DATE_END\n\n5️⃣ !stocks.dps.dpotc TICKER DATE_START DATE_END\n\n6️⃣ "
             "!stocks.dps.spos TICKER\n\n7️⃣ !stocks.dps.psi TICKER"
         )
