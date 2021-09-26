@@ -3,7 +3,7 @@ import discord
 from helpers import pagination
 from discordbot import gst_bot
 import config_discordbot as cfg
-from stocks.stock_main import load
+import helpers
 import os
 import asyncio
 from datetime import datetime, timedelta
@@ -85,7 +85,7 @@ def fail_to_deliver_command(ticker, start, end):
     plt.gcf().autofmt_xdate()
     plt.xlabel("Days")
     _ = plt.gca().twinx()
-    stock = load(ticker, start)
+    stock = helpers.load(ticker, start)
     stock_ftd = stock[stock.index > start]
     stock_ftd = stock_ftd[stock_ftd.index < end]
     plt.plot(stock_ftd.index, stock_ftd["Adj Close"], color="tab:orange")

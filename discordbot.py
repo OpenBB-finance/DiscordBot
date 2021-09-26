@@ -13,15 +13,17 @@ gst_bot = discord.ext.commands.Bot(
 )
 discord_components.DiscordComponents(gst_bot)
 
+
 async def on_ready():
     print("GST Discord Bot Ready to Gamestonk!")
+
 
 gst_imgur = pyimgur.Imgur(cfg.IMGUR_CLIENT_ID)
 
 # Loads the commands (Cogs) from each "context"
 gst_bot.load_extension("general_commands")
 gst_bot.load_extension("economy.menu")
-gst_bot.load_extension("stocks.dark_pool_shorts")
+gst_bot.load_extension("stocks.dark_pool_shorts.menu")
 
 # Runs the bot
 gst_bot.run(cfg.DISCORD_BOT_TOKEN)

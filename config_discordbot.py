@@ -22,3 +22,6 @@ IMGUR_CLIENT_ID = os.getenv("GT_IMGUR_CLIENT_ID") or "REPLACE_ME"
 COMMAND_PREFIX = "!"
 DATE_FORMAT = "%Y-%m-%d"
 COLOR = discord.Color.from_rgb(0, 206, 154)
+
+AUTHOR_NAME = "Gamestonk Terminal"
+AUTHOR_ICON_URL = "https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true"
