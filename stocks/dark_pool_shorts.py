@@ -1,9 +1,9 @@
 from discord.ext import commands
 import discord
-from discordbot import bot_colour, pagination, gst_bot, date_input_format
+from discordbot import bot_colour, gst_bot, date_input_format
+from helpers import pagination
 import config_discordbot as cfg
 from stocks.stock_main import load
-import sys
 import os
 import asyncio
 from datetime import datetime, timedelta

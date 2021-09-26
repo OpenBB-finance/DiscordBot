@@ -5,8 +5,9 @@ import os
 import pyimgur
 import datetime
 import asyncio
-from discordbot import bot_colour, pagination, gst_bot
+from discordbot import bot_colour, gst_bot
 import config_discordbot as cfg
+from helpers import pagination
 
 im = pyimgur.Imgur(cfg.IMGUR_CLIENT_ID)
 
