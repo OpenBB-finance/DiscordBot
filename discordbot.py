@@ -19,7 +19,7 @@ async def on_ready():
 
 # Loads the commands (Cogs) from each "context"
 gst_bot.load_extension("general_commands")
-gst_bot.load_extension("economy_commands")
+gst_bot.load_extension("economy.menu")
 gst_bot.load_extension("stocks.dark_pool_shorts")
 
 # Runs the bot
