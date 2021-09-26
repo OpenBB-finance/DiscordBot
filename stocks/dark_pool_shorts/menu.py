@@ -28,13 +28,11 @@ class DarkPoolShortsCommands(discord.ext.commands.Cog):
         await hsi_command(ctx, arg)
 
     @discord.ext.commands.command(name="stocks.dps.pos")
-    async def pos(self, ctx: discord.ext.commands.Context, arg="10", arg2="dpp_dollar"):
-        arg = int(arg)
+    async def pos(self, ctx: discord.ext.commands.Context, arg="", arg2=""):
         await pos_command(ctx, arg, arg2)
 
     @discord.ext.commands.command(name="stocks.dps.sidtc")
-    async def sidtc(self, ctx: discord.ext.commands.Context, arg="10", arg2="float"):
-        arg = int(arg)
+    async def sidtc(self, ctx: discord.ext.commands.Context, arg="", arg2=""):
         await sidtc_command(ctx, arg, arg2)
 
     @discord.ext.commands.command(name="stocks.dps.ftd")

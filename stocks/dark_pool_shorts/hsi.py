@@ -10,6 +10,9 @@ async def hsi_command(ctx, arg=""):
     if not arg:
         arg = "10"
 
+    # Parse argument
+    num = int(arg)
+
     # Help
     if arg == "-h":
         help_txt = (
@@ -31,7 +34,7 @@ async def hsi_command(ctx, arg=""):
 
     else:
         df = shortinterest_model.get_high_short_interest()
-        df = df.iloc[1:].head(n=int(arg))
+        df = df.iloc[1:].head(n=num)
 
         future_column_name = df["Ticker"]
         df = df.transpose()

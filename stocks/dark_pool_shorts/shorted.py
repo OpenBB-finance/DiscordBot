@@ -28,7 +28,10 @@ async def shorted_command(ctx, arg=""):
         await ctx.send(embed=embed)
 
     else:
-        df = yahoofinance_model.get_most_shorted().head(int(arg))
+        # Parse argument
+        num = int(arg)
+
+        df = yahoofinance_model.get_most_shorted().head(num)
 
         df.dropna(how="all", axis=1, inplace=True)
         df = df.replace(float("NaN"), "")
