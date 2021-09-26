@@ -1,11 +1,10 @@
 from discord.ext import commands
 import discord
-from discordbot import bot_colour, gst_bot, date_input_format
 from helpers import pagination
+from discordbot import gst_bot
 import config_discordbot as cfg
 from stocks.stock_main import load
 import os
-import asyncio
 from datetime import datetime, timedelta
 from matplotlib import pyplot as plt
 import matplotlib.dates as mdates
@@ -41,7 +40,7 @@ async def shorted_command(ctx, arg):
         i += 1
     columns.append(
         discord.Embed(
-            title="Most Shorted Stocks", description=initial_str, colour=bot_colour
+            title="Most Shorted Stocks", description=initial_str, colour=cfg.COLOR
         ).set_author(
             name="Gamestonk Terminal",
             icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -52,7 +51,7 @@ async def shorted_command(ctx, arg):
             discord.Embed(
                 title="Most Shorted Stocks",
                 description="```" + df[column].fillna("").to_string() + "```",
-                colour=bot_colour,
+                colour=cfg.COLOR,
             ).set_author(
                 name="Gamestonk Terminal",
                 icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -68,9 +67,9 @@ def fail_to_deliver_command(ticker, start, end):
     if end == "":
         end = datetime.now()
     if isinstance(start, str):
-        start = datetime.strptime(start, date_input_format)
+        start = datetime.strptime(start, cfg.DATE_FORMAT)
     if isinstance(end, str):
-        end = datetime.strptime(end, date_input_format)
+        end = datetime.strptime(end, cfg.DATE_FORMAT)
     plt.ion()
     ftds_data = sec_model.get_fails_to_deliver(ticker, start, end, 0)
     plt.bar(
@@ -95,7 +94,7 @@ def fail_to_deliver_command(ticker, start, end):
     uploaded_image = im.upload_image("dps_ftd.png", title="something")
     image_link = uploaded_image.link
     title = "Fail to Deliever " + ticker
-    embed = discord.Embed(title=title, colour=bot_colour)
+    embed = discord.Embed(title=title, colour=cfg.COLOR)
     embed.set_author(
         name="Gamestonk Terminal",
         icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -111,13 +110,13 @@ def dark_pool_otc_command(ticker, start, end):
     if end == "":
         end = datetime.now()
     if isinstance(start, str):
-        start = datetime.strptime(start, date_input_format)
+        start = datetime.strptime(start, cfg.DATE_FORMAT)
     if isinstance(end, str):
-        end = datetime.strptime(end, date_input_format)
+        end = datetime.strptime(end, cfg.DATE_FORMAT)
     plt.ion()
 
     title = "Dark Pool OTC " + ticker
-    embed = discord.Embed(title=title, colour=bot_colour)
+    embed = discord.Embed(title=title, colour=cfg.COLOR)
     embed.set_author(
         name="Gamestonk Terminal",
         icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -204,7 +203,7 @@ def dark_pool_otc_command(ticker, start, end):
 def spos_command(ticker):
     plt.ion()
     title = "SPOS " + ticker
-    embed = discord.Embed(title=title, colour=bot_colour)
+    embed = discord.Embed(title=title, colour=cfg.COLOR)
     embed.set_author(
         name="Gamestonk Terminal",
         icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -252,7 +251,7 @@ def spos_command(ticker):
 def psi_command(ticker):
     plt.ion()
     title = "PSI " + ticker
-    embed = discord.Embed(title=title, colour=bot_colour)
+    embed = discord.Embed(title=title, colour=cfg.COLOR)
     embed.set_author(
         name="Gamestonk Terminal",
         icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -339,7 +338,7 @@ async def high_short_interest_command(ctx, num):
         i += 1
     columns.append(
         discord.Embed(
-            title="High Short Interest", description=initial_str, colour=bot_colour
+            title="High Short Interest", description=initial_str, colour=cfg.COLOR
         ).set_author(
             name="Gamestonk Terminal",
             icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -350,7 +349,7 @@ async def high_short_interest_command(ctx, num):
             discord.Embed(
                 title="High Short Interest",
                 description="```" + df[column].fillna("").to_string() + "```",
-                colour=bot_colour,
+                colour=cfg.COLOR,
             ).set_author(
                 name="Gamestonk Terminal",
                 icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -393,7 +392,7 @@ async def pos_command(ctx, num, sort):
         i += 1
     columns.append(
         discord.Embed(
-            title="Dark Pool Short Position", description=initial_str, colour=bot_colour
+            title="Dark Pool Short Position", description=initial_str, colour=cfg.COLOR
         ).set_author(
             name="Gamestonk Terminal",
             icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -408,7 +407,7 @@ async def pos_command(ctx, num, sort):
                 + "\n\n"
                 + df[column].fillna("").to_string()
                 + "```",
-                colour=bot_colour,
+                colour=cfg.COLOR,
             ).set_author(
                 name="Gamestonk Terminal",
                 icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -444,7 +443,7 @@ async def sidtc_command(ctx, num, sort):
         i += 1
     columns.append(
         discord.Embed(
-            title="Dark Pool Shorts", description=initial_str, colour=bot_colour
+            title="Dark Pool Shorts", description=initial_str, colour=cfg.COLOR
         ).set_author(
             name="Gamestonk Terminal",
             icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -459,7 +458,7 @@ async def sidtc_command(ctx, num, sort):
                 + "\n\n"
                 + df[column].fillna("").to_string()
                 + "```",
-                colour=bot_colour,
+                colour=cfg.COLOR,
             ).set_author(
                 name="Gamestonk Terminal",
                 icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -522,14 +521,13 @@ class DarkPoolShortsCommands(commands.Cog):
             "(default: 10) SORT (default: dpp_dollar; options: sv,sv_pct,nsv,nsv_dollar,dpp,dpp_dollar)\n\n3️⃣ "
             "!stocks.dps.sidtc NUM (default: 10) SORT (default: float; options: float,dtc,si)\n\nCommands below "
             "require the input TICKER and must be entered directly:\n(DATE format: "
-            + date_input_format
-            + ")\n\n4️⃣"
+            + +")\n\n4️⃣"
             "!stocks.dps.ftd TICKER DATE_START DATE_END\n\n5️⃣ !stocks.dps.dpotc TICKER DATE_START DATE_END\n\n6️⃣ "
             "!stocks.dps.spos TICKER\n\n7️⃣ !stocks.dps.psi TICKER"
         )
 
         title = "Dark Pool Shorts (DPS) Menu"
-        embed = discord.Embed(title=title, description=text, colour=bot_colour)
+        embed = discord.Embed(title=title, description=text, colour=cfg.COLOR)
         embed.set_author(
             name="Gamestonk Terminal",
             icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",

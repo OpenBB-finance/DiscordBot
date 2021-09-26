@@ -5,7 +5,7 @@ import os
 import pyimgur
 import datetime
 import asyncio
-from discordbot import bot_colour, gst_bot
+from discordbot import gst_bot
 import config_discordbot as cfg
 from helpers import pagination
 
@@ -78,7 +78,7 @@ def feargreed_command():
         print("Error with uploading the the image to Imgur.")
         image_link = uploaded_image.link
         embed = discord.Embed(
-            title="CNN Fear Geed Index", description=report, colour=bot_colour
+            title="CNN Fear Geed Index", description=report, colour=cfg.COLOR
         )
         embed.set_author(
             name="Gamestonk Terminal",
@@ -87,9 +87,7 @@ def feargreed_command():
         return embed
     uploaded_image = im.upload_image(image_path, title="something")
     image_link = uploaded_image.link
-    embed = discord.Embed(
-        title="CNN Fear Geed Index", description=report, colour=bot_colour
-    )
+    embed = discord.Embed(title="CNN Fear Geed Index", description=report, colour=cfg.COLOR)
     embed.set_author(
         name="Gamestonk Terminal",
         icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -106,7 +104,7 @@ def overview_command():
     else:
         df_data_str = "```" + df_data.to_string(index=False) + "```"
     embed = discord.Embed(
-        title="WSJ Market Overview", description=df_data_str, colour=bot_colour
+        title="WSJ Market Overview", description=df_data_str, colour=cfg.COLOR
     )
     embed.set_author(
         name="Gamestonk Terminal",
@@ -121,9 +119,7 @@ def indices_command():
         df_data_str = "No indices data available"
     else:
         df_data_str = "```" + df_data.to_string(index=False) + "```"
-    embed = discord.Embed(
-        title="WSJ US Indices", description=df_data_str, colour=bot_colour
-    )
+    embed = discord.Embed(title="WSJ US Indices", description=df_data_str, colour=cfg.COLOR)
     embed.set_author(
         name="Gamestonk Terminal",
         icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -138,7 +134,7 @@ def futures_command():
     else:
         df_data_str = "```" + df_data.to_string(index=False) + "```"
     embed = discord.Embed(
-        title="WSJ Futures/Commodities", description=df_data_str, colour=bot_colour
+        title="WSJ Futures/Commodities", description=df_data_str, colour=cfg.COLOR
     )
     embed.set_author(
         name="Gamestonk Terminal",
@@ -153,9 +149,7 @@ def usbonds_command():
         df_data_str = "No US bonds data available"
     else:
         df_data_str = "```" + df_data.to_string(index=False) + "```"
-    embed = discord.Embed(
-        title="WSJ US Bonds", description=df_data_str, colour=bot_colour
-    )
+    embed = discord.Embed(title="WSJ US Bonds", description=df_data_str, colour=cfg.COLOR)
     embed.set_author(
         name="Gamestonk Terminal",
         icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -170,7 +164,7 @@ def glbonds_command():
     else:
         df_data_str = "```" + df_data.to_string(index=False) + "```"
     embed = discord.Embed(
-        title="WSJ Global Bonds", description=df_data_str, colour=bot_colour
+        title="WSJ Global Bonds", description=df_data_str, colour=cfg.COLOR
     )
     embed.set_author(
         name="Gamestonk Terminal",
@@ -185,9 +179,7 @@ def currencies_command():
         df_data_str = "No currencies data available"
     else:
         df_data_str = "```" + df_data.to_string(index=False) + "```"
-    embed = discord.Embed(
-        title="WSJ Currencies", description=df_data_str, colour=bot_colour
-    )
+    embed = discord.Embed(title="WSJ Currencies", description=df_data_str, colour=cfg.COLOR)
     embed.set_author(
         name="Gamestonk Terminal",
         icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -213,7 +205,7 @@ async def valuation_command(ctx, arg):
         discord.Embed(
             title="Finviz " + sector + " Valuation",
             description=initial_str,
-            colour=bot_colour,
+            colour=cfg.COLOR,
         ).set_author(
             name="Gamestonk Terminal",
             icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -223,7 +215,7 @@ async def valuation_command(ctx, arg):
         columns.append(
             discord.Embed(
                 description="```" + df_group[column].fillna("").to_string() + "```",
-                colour=bot_colour,
+                colour=cfg.COLOR,
             ).set_author(
                 name="Gamestonk Terminal",
                 icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -251,7 +243,7 @@ async def performance_command(ctx, arg):
         discord.Embed(
             title="Finviz " + sector + " Performance",
             description=initial_str,
-            colour=bot_colour,
+            colour=cfg.COLOR,
         ).set_author(
             name="Gamestonk Terminal",
             icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -261,7 +253,7 @@ async def performance_command(ctx, arg):
         columns.append(
             discord.Embed(
                 description="```" + df_group[column].fillna("").to_string() + "```",
-                colour=bot_colour,
+                colour=cfg.COLOR,
             ).set_author(
                 name="Gamestonk Terminal",
                 icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -328,7 +320,7 @@ class EconomyCommands(commands.Cog):
         )
 
         title = "Economy Menu"
-        embed = discord.Embed(title=title, description=text, colour=bot_colour)
+        embed = discord.Embed(title=title, description=text, colour=cfg.COLOR)
         embed.set_author(
             name="Gamestonk Terminal",
             icon_url="https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true",
@@ -351,7 +343,9 @@ class EconomyCommands(commands.Cog):
             return user == ctx.message.author and str(reaction.emoji) in emoji_list
 
         try:
-            reaction, user = await gst_bot.wait_for("reaction_add", timeout=10, check=check)
+            reaction, user = await gst_bot.wait_for(
+                "reaction_add", timeout=10, check=check
+            )
             if reaction.emoji == "0️⃣":
                 embed = overview_command()
                 await ctx.send(embed=embed)

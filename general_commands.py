@@ -1,6 +1,6 @@
 from discord.ext import commands
 import discord
-from discordbot import bot_colour
+import config_discordbot as cfg
 
 
 class GeneralCommands(commands.Cog):
@@ -29,7 +29,7 @@ class GeneralCommands(commands.Cog):
         embed = discord.Embed(
             title="Investment Research for Everyone",
             description=links,
-            colour=bot_colour,
+            colour=cfg.COLOR,
         )
         embed.set_author(
             name="Gamestonk Terminal",
