@@ -21,32 +21,32 @@ class EconomyCommands(discord.ext.commands.Cog):
         self.bot = bot
 
     @discord.ext.commands.command(name="economy.feargreed")
-    async def feargreed(self, ctx: discord.ext.commands.Context):
-        await feargreed_command(ctx)
+    async def feargreed(self, ctx: discord.ext.commands.Context, arg=""):
+        await feargreed_command(ctx, arg)
 
     @discord.ext.commands.command(name="economy.overview")
-    async def overview(self, ctx: discord.ext.commands.Context):
-        await overview_command(ctx)
+    async def overview(self, ctx: discord.ext.commands.Context, arg=""):
+        await overview_command(ctx, arg)
 
     @discord.ext.commands.command(name="economy.indices")
-    async def indices(self, ctx: discord.ext.commands.Context):
-        await indices_command(ctx)
+    async def indices(self, ctx: discord.ext.commands.Context, arg=""):
+        await indices_command(ctx, arg)
 
     @discord.ext.commands.command(name="economy.futures")
-    async def futures(self, ctx: discord.ext.commands.Context):
-        await futures_command(ctx)
+    async def futures(self, ctx: discord.ext.commands.Context, arg=""):
+        await futures_command(ctx, arg)
 
     @discord.ext.commands.command(name="economy.usbonds")
-    async def usbonds(self, ctx: discord.ext.commands.Context):
-        await usbonds_command(ctx)
+    async def usbonds(self, ctx: discord.ext.commands.Context, arg=""):
+        await usbonds_command(ctx, arg)
 
     @discord.ext.commands.command(name="economy.glbonds")
-    async def glbonds(self, ctx: discord.ext.commands.Context):
-        await glbonds_command(ctx)
+    async def glbonds(self, ctx: discord.ext.commands.Context, arg=""):
+        await glbonds_command(ctx, arg)
 
     @discord.ext.commands.command(name="economy.currencies")
-    async def currencies(self, ctx: discord.ext.commands.Context):
-        await currencies_command(ctx)
+    async def currencies(self, ctx: discord.ext.commands.Context, arg=""):
+        await currencies_command(ctx, arg)
 
     @discord.ext.commands.command(name="economy.valuation")
     async def valuation(self, ctx: discord.ext.commands.Context, arg=""):
@@ -66,8 +66,8 @@ class EconomyCommands(discord.ext.commands.Cog):
             "4️⃣ !economy.indices\n"
             "5️⃣ !economy.currencies\n"
             "6️⃣ !economy.feargreed\n"
-            "7️⃣ !economy.valuation <GROUP> (e.g. sector)\n"
-            "8️⃣ !economy.performance <GROUP> (e.g. sector)"
+            "7️⃣ !economy.valuation <GROUP>\n"
+            "8️⃣ !economy.performance <GROUP>"
         )
 
         title = "Economy Menu"

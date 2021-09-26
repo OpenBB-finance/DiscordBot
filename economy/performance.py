@@ -1,21 +1,22 @@
 import discord
 import config_discordbot as cfg
 from helpers import pagination
+from colorama import Style
 
 from gamestonk_terminal.economy import finviz_model
 
 economy_group = {
     "sector": "Sector",
     "industry": "Industry",
-    "basic materials": "Industry (Basic Materials)",
+    "basic_materials": "Industry (Basic Materials)",
     "communication services": "Industry (Communication Services)",
-    "consumer cyclical": "Industry (Consumer Cyclical)",
-    "consumer defensive": "Industry (Consumer Defensive)",
+    "consumer_cyclical": "Industry (Consumer Cyclical)",
+    "consumer_defensive": "Industry (Consumer Defensive)",
     "energy": "Industry (Energy)",
     "financial": "Industry (Financial)",
     "healthcare": "Industry (Healthcare)",
     "industrials": "Industry (Industrials)",
-    "real Estate": "Industry (Real Estate)",
+    "real_estate": "Industry (Real Estate)",
     "technology": "Industry (Technology)",
     "utilities": "Industry (Utilities)",
     "country": "Country (U.S. listed stocks only)",
@@ -27,40 +28,61 @@ async def performance_command(ctx, arg):
     # Select default
     if not arg:
         arg = "sector"
-    group = economy_group[arg]
-    df_group = finviz_model.get_valuation_performance_data(group, "performance")
 
-    future_column_name = df_group["Name"]
-    df_group = df_group.transpose()
-    df_group.columns = future_column_name
-    df_group.drop("Name")
-    columns = []
+    # Help
+    if arg == "-h":
+        help_txt = "Group performance [Source: Finviz]\n"
 
-    initial_str = "Page 0: Overview"
-    i = 1
-    for col_name in df_group.columns.values:
-        initial_str += f"\nPage {i}: {col_name}"
-        i += 1
+        possible_args = ""
+        for k, v in economy_group.items():
+            possible_args += f"\n{k}: {v}"
 
-    columns.append(
-        discord.Embed(
-            title=f"[Finviz] Performance {group}",
-            description=initial_str,
-            colour=cfg.COLOR,
-        ).set_author(
+        help_txt += f"Possible <GROUP> arguments are:{possible_args}"
+        embed = discord.Embed(
+            title="[Finviz] Performance HELP", description=help_txt, colour=cfg.COLOR
+        )
+        embed.set_author(
             name=cfg.AUTHOR_NAME,
             icon_url=cfg.AUTHOR_ICON_URL,
         )
-    )
-    for column in df_group.columns.values:
+
+        await ctx.send(embed=embed)
+
+    else:
+        group = economy_group[arg]
+        df_group = finviz_model.get_valuation_performance_data(group, "performance")
+
+        future_column_name = df_group["Name"]
+        df_group = df_group.transpose()
+        df_group.columns = future_column_name
+        df_group.drop("Name")
+        columns = []
+
+        initial_str = "Page 0: Overview"
+        i = 1
+        for col_name in df_group.columns.values:
+            initial_str += f"\nPage {i}: {col_name}"
+            i += 1
+
         columns.append(
             discord.Embed(
-                description="```" + df_group[column].fillna("").to_string() + "```",
+                title=f"[Finviz] Performance {group}",
+                description=initial_str,
                 colour=cfg.COLOR,
             ).set_author(
                 name=cfg.AUTHOR_NAME,
                 icon_url=cfg.AUTHOR_ICON_URL,
             )
         )
+        for column in df_group.columns.values:
+            columns.append(
+                discord.Embed(
+                    description="```" + df_group[column].fillna("").to_string() + "```",
+                    colour=cfg.COLOR,
+                ).set_author(
+                    name=cfg.AUTHOR_NAME,
+                    icon_url=cfg.AUTHOR_ICON_URL,
+                )
+            )
 
-    await pagination(columns, ctx)
+        await pagination(columns, ctx)
