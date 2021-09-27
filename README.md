@@ -9,13 +9,13 @@ Implementation of a discord bot, which is WORK IN PROGRESS
   </a>
 
 ## Set Up
-  
+
 ### Step 1: Getting a discord bot
 Go to https://discord.com/developers/applications and click on "New Application" (See Picture 1)
 Enter a name for example "Gamestonk Terminal Discord Bot"
 Picture 1:
 <img src="images/picture_1.png" alt="Logo" width="1183" height="157">
-Then go to the bot page: 
+Then go to the bot page:
 <img src="images/picture_2.png" alt="Logo" width="1183" height="251">
 Then press "Add Bot":
 <img src="images/picture_3.png" alt="Logo" width="1183" height="324">
@@ -45,7 +45,7 @@ Then change the settings in the beginning of main.py:
 ##############
 DISCORD_BOT_TOKEN = 'string' # Insert your bots secrets token
 IMGUR_CLIENT_ID = 'string' # Enter your imgur client id
-command_prefix = '!' # Sets the prefix to the commands
+COMMAND_PREFIX = '!' # Sets the prefix to the commands
 activity = discord.Game(name='Gametonk Terminal: https://github.com/GamestonkTerminal/GamestonkTerminal')
 gst_path = 'C:\\Users\\user\\GamestonkTerminal' # The path to Gamestonk Terminal
 date_input_format = '%Y-%m-%d' # Enter your prefered date input format
@@ -55,7 +55,7 @@ date_input_format = '%Y-%m-%d' # Enter your prefered date input format
 Activate your GST virtual enviroment and go to the place where your main.py file is located and run it.
 <img src="images/image.png" alt="Logo" width="1167" height="294">
 Your finished! Go to your server and you should see the bot online!!!
-  
+
 ## Code Structure and Contributing
 The file system is built in the following way:
 - Each context is one file unless it has categories and if it has it then it should have a file in the directory named context_main.py (example: Stocks has as a category Dark Pool Shorts -> stocks is a directory with a file stocks_main.py and dps is a file; economy has no categories -> economy is one file)
@@ -64,18 +64,18 @@ The file system is built in the following way:
 A context/category file is built in the following way:
 ```
 Imports
-  
+
 Functions
   Returns the embed or sends the response via pagination function from main
-  
+
 Class with the commands as cogs
   The Commands call the functions with given arguments
   Has one command with a list of the commands and can run them via emoji reactions from the user
-  
+
 Add the cogs class to the bot
 ```
 If a funtion is often used by a context with categories or multiple files then add them to the context_main.py or the main.py file.
-  
+
 ## Disclaimer
 "A few things I am not. I am not a cat. I am not an institutional investor, nor am I a hedge fund. I do not have clients and I do not provide personalized investment advice for fees or commissions." DFV
 
