@@ -25,9 +25,9 @@ async def pos_command(ctx, arg, arg2):
             possible_args += f"\n{k}: {v}"
 
         help_txt += "\nPossible argments:\n"
-        help_txt += "<NUM> Number of top tickers to show. Default: 10\n"
         help_txt += "<SORT> Field for which to sort by. Default: dpp_dollar\n"
         help_txt += f"The choices are:{possible_args}"
+        help_txt += "<NUM> Number of top tickers to show. Default: 10\n"
 
         embed = discord.Embed(
             title="Stocks: [Stockgrid] Dark Pool Short Position HELP",
@@ -44,13 +44,13 @@ async def pos_command(ctx, arg, arg2):
     else:
         # Select default
         if not arg:
-            arg = "10"
+            arg = "dpp_dollar"
         if not arg2:
-            arg2 = "dpp_dollar"
+            arg2 = "10"
 
         # Parse argument
-        num = int(arg)
-        sort = arg2
+        sort = arg
+        num = int(arg2)
 
         df = stockgrid_model.get_dark_pool_short_positions(sort, False)
         df = df.iloc[:num]
