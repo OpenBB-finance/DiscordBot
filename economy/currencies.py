@@ -6,7 +6,7 @@ from gamestonk_terminal.economy import wsj_model
 
 async def currencies_command(ctx, arg):
     # Help
-    if arg == "-h":
+    if arg == "-h" or arg == "help":
         help_txt = "Currencies [Source: Wall St. Journal]\n"
         embed = discord.Embed(
             title="Economy: [WSJ] Currencies HELP",

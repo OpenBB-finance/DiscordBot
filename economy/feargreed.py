@@ -10,7 +10,7 @@ from gamestonk_terminal.economy import cnn_view, cnn_model
 
 async def feargreed_command(ctx, arg):
     # Help
-    if arg == "-h":
+    if arg == "-h" or arg == "help":
         help_txt = """CNN Fear And Greed indicator or index. From Junk Bond Demand, Market Volatility,
         Put and Call Options, Market Momentum Stock Price Strength, Stock Price Breadth,
         Safe Heaven Demand, and Index. [Source: CNN Business]\n"""

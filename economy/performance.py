@@ -26,7 +26,7 @@ async def performance_command(ctx, arg):
     }
 
     # Help
-    if arg == "-h":
+    if arg == "-h" or arg == "help":
         help_txt = "Group performance [Source: Finviz]\n"
 
         possible_args = ""

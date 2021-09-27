@@ -7,7 +7,7 @@ from gamestonk_terminal.stocks.dark_pool_shorts import yahoofinance_model
 
 async def shorted_command(ctx, arg):
     # Help
-    if arg == "-h":
+    if arg == "-h" or arg == "help":
         help_txt = "Display most shorted stocks screener. [Source: Yahoo Finance]\n"
         help_txt += "\nPossible argments:\n"
         help_txt += f"<NUM> Number of stocks to display. Default: 5"

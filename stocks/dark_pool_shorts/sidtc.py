@@ -7,7 +7,7 @@ from gamestonk_terminal.stocks.dark_pool_shorts import stockgrid_model
 
 async def sidtc_command(ctx, arg, arg2):
     # Help
-    if arg == "-h":
+    if arg == "-h" or arg == "help":
         dark_pool_sort = {
             "float": "Float Short %",
             "dtc": "Days to Cover",

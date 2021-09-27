@@ -12,7 +12,7 @@ from gamestonk_terminal.stocks.dark_pool_shorts import finra_model
 
 async def dpotc_command(ctx, arg):
     # Help
-    if arg == "-h":
+    if arg == "-h" or arg == "help":
         help_txt = "Display barchart of dark pool (ATS) and OTC (Non ATS) data. [Source: FINRA]\n"
         help_txt += "\nPossible argments:\n"
         help_txt += "<TICKER> Stock ticker. REQUIRED!\n"

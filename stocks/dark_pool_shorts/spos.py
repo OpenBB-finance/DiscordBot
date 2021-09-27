@@ -10,7 +10,7 @@ from gamestonk_terminal.stocks.dark_pool_shorts import stockgrid_model
 
 async def spos_command(ctx, arg):
     # Help
-    if arg == "-h":
+    if arg == "-h" or arg == "help":
         help_txt = "Plot net short position. [Source: Stockgrid]\n"
         help_txt += "\nPossible argments:\n"
         help_txt += "<TICKER> Stock ticker. REQUIRED!\n"

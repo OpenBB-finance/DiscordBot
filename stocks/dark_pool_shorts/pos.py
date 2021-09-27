@@ -8,7 +8,7 @@ from gamestonk_terminal.stocks.dark_pool_shorts import stockgrid_model
 async def pos_command(ctx, arg, arg2):
 
     # Help
-    if arg == "-h":
+    if arg == "-h" or arg == "help":
         dark_pool_sort = {
             "sv": "Short Vol. (1M)",
             "sv_pct": "Short Vol. %",

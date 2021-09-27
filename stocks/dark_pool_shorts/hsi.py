@@ -8,7 +8,7 @@ from gamestonk_terminal.stocks.dark_pool_shorts import shortinterest_model
 async def hsi_command(ctx, arg):
 
     # Help
-    if arg == "-h":
+    if arg == "-h" or arg == "help":
         help_txt = (
             "Display top high shorted interest stocks [Source: highshortinterest.com]\n"
         )

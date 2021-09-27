@@ -25,7 +25,7 @@ async def valuation_command(ctx, arg):
     }
 
     # Help
-    if arg == "-h":
+    if arg == "-h" or arg == "help":
         help_txt = "Group valuation [Source: Finviz]\n"
 
         possible_args = ""

@@ -6,7 +6,7 @@ from gamestonk_terminal.economy import wsj_model
 
 async def glbonds_command(ctx, arg):
     # Help
-    if arg == "-h":
+    if arg == "-h" or arg == "help":
         help_txt = "Global Bonds [Source: Wall St. Journal]\n"
         embed = discord.Embed(
             title="Economy: [WSJ] Global Bonds HELP",

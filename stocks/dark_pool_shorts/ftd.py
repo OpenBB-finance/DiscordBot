@@ -12,7 +12,7 @@ from gamestonk_terminal.stocks.dark_pool_shorts import sec_model
 
 async def ftd_command(ctx, arg, arg2, arg3):
     # Help
-    if arg == "-h":
+    if arg == "-h" or arg == "help":
         help_txt = "Display fails-to-deliver data for a given ticker. [Source: SEC]\n"
         help_txt += "\nPossible argments:\n"
         help_txt += "<TICKER> Stock ticker. REQUIRED!\n"
