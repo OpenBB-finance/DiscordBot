@@ -88,7 +88,7 @@ class EconomyCommands(discord.ext.commands.Cog):
 
         try:
             reaction, user = await gst_bot.wait_for(
-                "reaction_add", timeout=10, check=check
+                "reaction_add", timeout=cfg.MENU_TIMEOUT, check=check
             )
             if reaction.emoji == "0️⃣":
                 await overview_command(ctx)
