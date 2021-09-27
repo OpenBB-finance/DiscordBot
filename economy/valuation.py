@@ -24,10 +24,6 @@ async def valuation_command(ctx, arg):
         "capitalization": "Capitalization",
     }
 
-    # Select default
-    if not arg:
-        arg = "sector"
-
     # Help
     if arg == "-h":
         help_txt = "Group valuation [Source: Finviz]\n"
@@ -52,6 +48,10 @@ async def valuation_command(ctx, arg):
         await ctx.send(embed=embed)
 
     else:
+        # Select default
+        if not arg:
+            arg = "sector"
+
         # Parse argument
         group = economy_group[arg]
 

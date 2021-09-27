@@ -6,12 +6,6 @@ from gamestonk_terminal.stocks.dark_pool_shorts import stockgrid_model
 
 
 async def sidtc_command(ctx, arg, arg2):
-    # Select default
-    if not arg:
-        arg = "10"
-    if not arg2:
-        arg2 = "float"
-
     # Help
     if arg == "-h":
         dark_pool_sort = {
@@ -44,6 +38,12 @@ async def sidtc_command(ctx, arg, arg2):
         await ctx.send(embed=embed)
 
     else:
+        # Select default
+        if not arg:
+            arg = "10"
+        if not arg2:
+            arg2 = "float"
+
         # Parse argument
         num = int(arg)
         sort = arg2

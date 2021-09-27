@@ -6,11 +6,6 @@ from gamestonk_terminal.stocks.dark_pool_shorts import stockgrid_model
 
 
 async def pos_command(ctx, arg, arg2):
-    # Select default
-    if not arg:
-        arg = "10"
-    if not arg2:
-        arg2 = "dpp_dollar"
 
     # Help
     if arg == "-h":
@@ -47,6 +42,12 @@ async def pos_command(ctx, arg, arg2):
         await ctx.send(embed=embed)
 
     else:
+        # Select default
+        if not arg:
+            arg = "10"
+        if not arg2:
+            arg2 = "dpp_dollar"
+
         # Parse argument
         num = int(arg)
         sort = arg2

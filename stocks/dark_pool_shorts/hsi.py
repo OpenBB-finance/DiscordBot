@@ -5,13 +5,7 @@ from helpers import pagination
 from gamestonk_terminal.stocks.dark_pool_shorts import shortinterest_model
 
 
-async def hsi_command(ctx, arg=""):
-    # Select default
-    if not arg:
-        arg = "10"
-
-    # Parse argument
-    num = int(arg)
+async def hsi_command(ctx, arg):
 
     # Help
     if arg == "-h":
@@ -33,6 +27,13 @@ async def hsi_command(ctx, arg=""):
         await ctx.send(embed=embed)
 
     else:
+        # Select default
+        if not arg:
+            arg = "10"
+
+        # Parse argument
+        num = int(arg)
+
         df = shortinterest_model.get_high_short_interest()
         df = df.iloc[1:].head(n=num)
 

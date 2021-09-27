@@ -5,11 +5,7 @@ from helpers import pagination
 from gamestonk_terminal.stocks.dark_pool_shorts import yahoofinance_model
 
 
-async def shorted_command(ctx, arg=""):
-    # Select default
-    if not arg:
-        arg = "5"
-
+async def shorted_command(ctx, arg):
     # Help
     if arg == "-h":
         help_txt = "Display most shorted stocks screener. [Source: Yahoo Finance]\n"
@@ -28,6 +24,10 @@ async def shorted_command(ctx, arg=""):
         await ctx.send(embed=embed)
 
     else:
+        # Select default
+        if not arg:
+            arg = "5"
+
         # Parse argument
         num = int(arg)
 
