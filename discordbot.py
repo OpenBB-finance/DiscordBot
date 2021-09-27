@@ -21,7 +21,7 @@ async def on_ready():
 gst_imgur = pyimgur.Imgur(cfg.IMGUR_CLIENT_ID)
 
 # Loads the commands (Cogs) from each "context"
-gst_bot.load_extension("general_commands")
+gst_bot.load_extension("generic_commands")
 gst_bot.load_extension("economy.menu")
 gst_bot.load_extension("stocks.dark_pool_shorts.menu")
 
