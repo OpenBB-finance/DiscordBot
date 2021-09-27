@@ -24,4 +24,4 @@ DATE_FORMAT = "%Y-%m-%d"
 COLOR = discord.Color.from_rgb(0, 206, 154)
 
 AUTHOR_NAME = "Gamestonk Terminal"
-AUTHOR_ICON_URL = "https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_rGreen.png?raw=true"
+AUTHOR_ICON_URL = "https://github.com/GamestonkTerminal/GamestonkTerminal/blob/main/images/gst_logo_green_white_background.png?raw=true"
