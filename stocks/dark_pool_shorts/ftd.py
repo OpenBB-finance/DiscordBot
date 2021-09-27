@@ -73,4 +73,5 @@ async def ftd_command(ctx, arg, arg2, arg3):
         )
         embed.set_image(url=image_link)
         os.remove("dps_ftd.png")
+
         await ctx.send(embed=embed)

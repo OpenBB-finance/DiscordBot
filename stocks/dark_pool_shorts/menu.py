@@ -40,18 +40,8 @@ class DarkPoolShortsCommands(discord.ext.commands.Cog):
         await ftd_command(ctx, arg, arg2, arg3)
 
     @discord.ext.commands.command(name="stocks.dps.dpotc")
-    async def dpotc(self, ctx: discord.ext.commands.Context, arg, arg2="", arg3=""):
-        if arg2:
-            if arg3:
-                embed = dpotc_command(arg, arg2, arg3)
-            else:
-                embed = dpotc_command(arg, arg2)
-        else:
-            if arg3:
-                embed = dpotc_command(arg, arg3=arg3)
-            else:
-                embed = dpotc_command(arg)
-        await ctx.send(embed=embed)
+    async def dpotc(self, ctx: discord.ext.commands.Context, arg):
+        await dpotc_command(ctx, arg)
 
     @discord.ext.commands.command(name="stocks.dps.spos")
     async def spos(self, ctx: discord.ext.commands.Context, arg):
