@@ -105,9 +105,9 @@ class EconomyCommands(discord.ext.commands.Cog):
             elif reaction.emoji == "6️⃣":
                 await feargreed_command(ctx)
             elif reaction.emoji == "7️⃣":
-                await valuation_command(ctx)
+                await valuation_command(ctx, "")
             elif reaction.emoji == "8️⃣":
-                await performance_command(ctx)
+                await performance_command(ctx, "")
 
             # TODO: Make this work - may need to set different discord server configurations
             # await msg.remove_reaction(reaction.emoji, user)

@@ -45,16 +45,11 @@ class DarkPoolShortsCommands(discord.ext.commands.Cog):
 
     @discord.ext.commands.command(name="stocks.dps.spos")
     async def spos(self, ctx: discord.ext.commands.Context, arg):
-        embed = spos_command(arg)
-        await ctx.send(embed=embed)
+        await spos_command(ctx, arg)
 
     @discord.ext.commands.command(name="stocks.dps.psi")
     async def psi(self, ctx: discord.ext.commands.Context, arg):
-        embed = psi_command(arg)
-        await ctx.send(embed=embed)
-
-    # !stocks.dps.pos <NUM> (default: 10) SORT (default: dpp_dollar; options: sv,sv_pct,nsv,nsv_dollar,dpp,dpp_dollar
-    # !stocks.dps.sidtc NUM (default: 10) SORT (default: float; options: float,dtc,si)
+        await psi_command(ctx, arg)
 
     @discord.ext.commands.command(name="stocks.dps")
     async def dark_pool_shorts_menu(self, ctx: discord.ext.commands.Context, arg=""):
@@ -66,10 +61,10 @@ class DarkPoolShortsCommands(discord.ext.commands.Cog):
         )
         if arg:
             text += (
-                "4️⃣ !stocks.dps.ftd <TICKER> <DATE_START> <DATE_END>\n"
-                "5️⃣ !stocks.dps.dpotc <TICKER> <DATE_START> <DATE_END>\n"
-                "6️⃣ !stocks.dps.spos <TICKER>\n"
-                "7️⃣ !stocks.dps.psi <TICKER>\n"
+                f"4️⃣ !stocks.dps.ftd {arg} <DATE_START> <DATE_END>\n"
+                f"5️⃣ !stocks.dps.dpotc {arg}\n"
+                f"6️⃣ !stocks.dps.spos {arg}\n"
+                f"7️⃣ !stocks.dps.psi {arg}\n"
             )
         else:
             text += (
@@ -88,7 +83,7 @@ class DarkPoolShortsCommands(discord.ext.commands.Cog):
         emoji_list = ["0️⃣", "1️⃣", "2️⃣", "3️⃣"]
 
         if arg:
-            emoji_list += ["4️⃣", "5️⃣", "6️⃣", "7️⃣", "8️⃣"]
+            emoji_list += ["4️⃣", "5️⃣", "6️⃣", "7️⃣"]
 
         for emoji in emoji_list:
             await msg.add_reaction(emoji)
@@ -101,13 +96,21 @@ class DarkPoolShortsCommands(discord.ext.commands.Cog):
                 "reaction_add", timeout=10, check=check
             )
             if reaction.emoji == "0️⃣":
-                await shorted_command(ctx, 5)
+                await shorted_command(ctx, "")
             elif reaction.emoji == "1️⃣":
-                await hsi_command(ctx, 10)
+                await hsi_command(ctx, "")
             elif reaction.emoji == "2️⃣":
-                await pos_command(ctx, 10, "dpp_dollar")
+                await pos_command(ctx, "", "")
             elif reaction.emoji == "3️⃣":
-                await sidtc_command(ctx, 10, "float")
+                await sidtc_command(ctx, "", "")
+            elif reaction.emoji == "4️⃣":
+                await ftd_command(ctx, arg, "", "")
+            elif reaction.emoji == "5️⃣":
+                await dpotc_command(ctx, arg)
+            elif reaction.emoji == "6️⃣":
+                await spos_command(ctx, arg)
+            elif reaction.emoji == "7️⃣":
+                await psi_command(ctx, arg)
 
         except asyncio.TimeoutError:
             text = text + "\n\nCommand timeout."

@@ -15,7 +15,7 @@ async def dpotc_command(ctx, arg):
     if arg == "-h":
         help_txt = "Display barchart of dark pool (ATS) and OTC (Non ATS) data. [Source: FINRA]\n"
         help_txt += "\nPossible argments:\n"
-        help_txt += "<TICKER> Stock ticker. REQUIRED!\m"
+        help_txt += "<TICKER> Stock ticker. REQUIRED!\n"
         embed = discord.Embed(
             title="Stocks: [FINRA] Dark Pools (ATS) vs OTC HELP",
             description=help_txt,
