@@ -22,8 +22,8 @@ async def sidtc_command(ctx, arg, arg2):
 
         help_txt += "\nPossible argments:\n"
         help_txt += "<SORT> Field for which to sort by. Default: float\n"
-        help_txt += f"The choices are:{possible_args}"
-        help_txt += "<NUM> Number of top tickers to show. Default: 10\n"
+        help_txt += f"The choices are:{possible_args}\n"
+        help_txt += "<NUM> Number of top tickers to show. Default: 10"
 
         embed = discord.Embed(
             title="Stocks: [Stockgrid] Short Interest and Days to Cover HELP",
